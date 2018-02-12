@@ -69,10 +69,13 @@ namespace C2Test2.Classes
             }
         }
 
+        public uint tDistance;
+
         public BusinessLogic()
         {
             speedLevel = 1;
-            speedRatio = 0.3;
+            speedRatio = 1;
+            this.tDistance = 0;
         }
 
         public void Connect()
@@ -90,10 +93,11 @@ namespace C2Test2.Classes
 
         public uint getNewDistance()
         {
-            CSAFECommand command = new CSAFECommand(0);
-            command.CommandsBytes.Add((uint)CSAFECommands.CSAFE_GETHORIZONTAL_CMD);
-            var data = command.Execute();
-            return PMUSBInterface.getMSB(data, 2);
+            //CSAFECommand command = new CSAFECommand(0);
+            //command.CommandsBytes.Add((uint)CSAFECommands.CSAFE_GETHORIZONTAL_CMD);
+            //var data = command.Execute();
+            //return PMUSBInterface.getMSB(data, 2);
+            return tDistance;
         }
 
         public double getSpeedLevelMultiplier()

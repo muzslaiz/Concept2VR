@@ -33,17 +33,17 @@ namespace C2Test2
         {
             PMUSBInterface.Initialize();
             var deviceNo = PMUSBInterface.DiscoverPMs(PMUSBInterface.PMtype.PM5_PRODUCT_NAME);
-            string message = "";
-            if (deviceNo > 0)
-            {
+            //string message = "";
+            //if (deviceNo > 0)
+            //{
                 Rowing rowWindow = new Rowing(ref logic);
                 rowWindow.ShowDialog();
-            }
-            else
-            {
-                message += "Nincs csatlakoztatva eszköz!";
-                MessageBox.Show(message);
-            }
+            //}
+            //else
+            //{
+            //    message += "Nincs csatlakoztatva eszköz!";
+            //    MessageBox.Show(message);
+            //}
 }
 
         private void btn_options_Click(object sender, RoutedEventArgs e)

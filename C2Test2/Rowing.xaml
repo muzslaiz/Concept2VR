@@ -11,7 +11,7 @@
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <MediaElement Name="VideoControl"  Source="C:\Users\muzslaiz\source\repos\C2Test2\C2Test2\Source\rowVideo.mp4"
+        <MediaElement Name="VideoControl"  Source="C:\Users\muzslaiz\source\repos\Concept2\C2Test2\Source\rowVideo.mp4"
                       LoadedBehavior="Manual" UnloadedBehavior="Stop" Grid.Row="0">
 
         </MediaElement>

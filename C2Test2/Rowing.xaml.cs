@@ -38,15 +38,15 @@ namespace C2Test2
             this.VideoControl.Play();
             this.VideoControl.Pause();
             this.VideoControl.Volume = 0;
+            this.VideoControl.ScrubbingEnabled = true;
 
-            logic.Connect();
+            //logic.Connect();
             logic.Distance = logic.getNewDistance();
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(3000);
             timer.Tick += timer_Tick;
             timer.Start();
-            //timer_Tick(sessionStart, new EventArgs());
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -71,25 +71,27 @@ namespace C2Test2
                 }
                 else
                 {
-                    if (stop > 0 && stop <= 2)
+                    double nextSpeed = Math.Round(logic.Speed / 2, 1) * logic.getSpeedLevelMultiplier();
+                    if (nextSpeed > 5)
                     {
-                        logic.Speed = Math.Round(logic.Speed / 2, 1) * logic.getSpeedLevelMultiplier();
+                        logic.Speed = nextSpeed;
+                        logic.setSpeedRatio();
+                        this.VideoControl.SpeedRatio = logic.SpeedRatio;
                     }
-                    else if (stop == 3)
+                    else
                     {
                         this.VideoControl.Pause();
                         logic.Speed = 0;
                         logic.SpeedRatio = 0;
                         isPlaying = false;
+                        if (stop >= 1)
+                        {
+                            TimeSpan ts = new TimeSpan(0, 0, 0, 0, 0);
+                            this.VideoControl.Position = ts;
+                            isPlaying = false;
+                        }
+                        stop++;
                     }
-                    else if (stop == 4)
-                    {
-                        this.VideoControl.Stop();
-                        this.VideoControl.Play();
-                        this.VideoControl.Pause();
-                        isPlaying = false;
-                    }
-                    stop++;
                 }
                 logic.Distance = newDistance;
             }
@@ -121,7 +123,10 @@ namespace C2Test2
             this.VideoControl.SpeedRatio = speedR;
             this.lbl_speedrate.Content = this.VideoControl.SpeedRatio;
         }
-        
-        
+
+        private void btn_speedUp_Click_1(object sender, RoutedEventArgs e)
+        {
+            logic.tDistance += 5;
+        }
     }
 }
