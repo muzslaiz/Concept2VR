@@ -1,0 +1,9 @@
+﻿<Application x:Class="C2Test2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:C2Test2"
+             StartupUri="MainWindow.xaml" LoadCompleted="Application_LoadCompleted">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
