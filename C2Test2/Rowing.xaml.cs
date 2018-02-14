@@ -53,6 +53,13 @@ namespace C2Test2
         {
             try
             {
+                //Is finished check
+                if (logic.WorkedDistance >= Constants.RowDistance && isPlaying)
+                {
+                    this.Reset();
+                }
+
+                //Speedcheck
                 uint newDistance = logic.getNewDistance();
                 double diff = 0;
 
@@ -62,7 +69,7 @@ namespace C2Test2
                     diff = (double)(newDistance - logic.Distance);
                     logic.Speed = (diff / 3) * 3.6 * logic.getSpeedLevelMultiplier();
                     logic.setSpeedRatio();
-                    this.VideoControl.SpeedRatio = logic.SpeedRatio;
+                    this.VideoControl.SpeedRatio = logic.SpeedRatio <= 3 ? logic.SpeedRatio : 3;
                     if (!isPlaying)
                     {
                         this.VideoControl.Play();
@@ -71,19 +78,22 @@ namespace C2Test2
                 }
                 else
                 {
-                    double nextSpeed = Math.Round(logic.Speed / 2, 1) * logic.getSpeedLevelMultiplier();
-                    if (nextSpeed > 5)
+                    double nextSpeed = Math.Round(logic.Speed / 1.3, 1);
+                    if (nextSpeed >= 5)
                     {
                         logic.Speed = nextSpeed;
                         logic.setSpeedRatio();
-                        this.VideoControl.SpeedRatio = logic.SpeedRatio;
+                        this.VideoControl.SpeedRatio = logic.SpeedRatio <= 3 ? logic.SpeedRatio : 3;
                     }
                     else
                     {
-                        this.VideoControl.Pause();
-                        logic.Speed = 0;
-                        logic.SpeedRatio = 0;
-                        isPlaying = false;
+                        if (isPlaying)
+                        {
+                            this.VideoControl.Pause();
+                            logic.Speed = 0;
+                            logic.SpeedRatio = 0;
+                            isPlaying = false;
+                        }
                         if (stop >= 1)
                         {
                             TimeSpan ts = new TimeSpan(0, 0, 0, 0, 0);
@@ -94,6 +104,8 @@ namespace C2Test2
                     }
                 }
                 logic.Distance = newDistance;
+                var prtg = (this.VideoControl.Position.TotalSeconds / this.VideoControl.NaturalDuration.TimeSpan.TotalSeconds);
+                logic.WorkedDistance = (int)(prtg * Constants.RowDistance);
             }
             catch (Exception ex)
             {
@@ -104,29 +116,27 @@ namespace C2Test2
             }
         }
 
-        private void btn_slowdown_Click(object sender, RoutedEventArgs e)
+        private void Reset()
         {
-            if (this.VideoControl.SpeedRatio - 0.2 >= 0)
-            {
-                double speedR = this.VideoControl.SpeedRatio;
-                speedR -= 0.2;
-                speedR = Math.Round(speedR, 1);
-                this.VideoControl.SpeedRatio = speedR;
-            }
-        }
-
-        private void btn_speedup_Click(object sender, RoutedEventArgs e)
-        {
-            double speedR = this.VideoControl.SpeedRatio;
-            speedR += 0.2;
-            speedR = Math.Round(speedR, 1);
-            this.VideoControl.SpeedRatio = speedR;
-            this.lbl_speedrate.Content = this.VideoControl.SpeedRatio;
+            this.VideoControl.Pause();
+            logic.Speed = 0;
+            logic.SpeedRatio = 0;
+            isPlaying = false;
+            TimeSpan ts = new TimeSpan(0, 0, 0, 0, 0);
+            this.VideoControl.Position = ts;
+            isPlaying = false;
         }
 
         private void btn_speedUp_Click_1(object sender, RoutedEventArgs e)
         {
             logic.tDistance += 5;
+        }
+
+        private void btn_progress_Click(object sender, RoutedEventArgs e)
+        {
+            var prg = this.VideoControl.Position.TotalSeconds;
+            var percentage = (this.VideoControl.Position.TotalSeconds / this.VideoControl.NaturalDuration.TimeSpan.TotalSeconds);
+            MessageBox.Show(percentage.ToString());
         }
     }
 }

@@ -71,10 +71,30 @@ namespace C2Test2.Classes
 
         public uint tDistance;
 
+        private int workedDistance;
+        public int WorkedDistance
+        {
+            get
+            {
+                return workedDistance;
+            }
+            set
+            {
+                this.workedDistance = value;
+                this.OnPropertyChanged("workedDistanceString");
+            }
+        }
+        public string workedDistanceString
+        {
+            get { return workedDistance.ToString() + " m"; }
+        }
+
+
         public BusinessLogic()
         {
             speedLevel = 1;
             speedRatio = 1;
+            workedDistance = 0;
             this.tDistance = 0;
         }
 
@@ -109,7 +129,10 @@ namespace C2Test2.Classes
                     ret = 1.5;
                 break;
                 case 2:
-                    ret = 2.3;
+                    ret = 1.7;
+                break;
+                case 3:
+                    ret = 2.1;
                 break;
             }
             return ret;

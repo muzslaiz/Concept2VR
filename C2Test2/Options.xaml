@@ -16,7 +16,7 @@
         Height="30"
         Width="270"
         Minimum="1"
-        Maximum="2"
+        Maximum="3"
         Value="{Binding Path=SpeedLevel}"
         IsSnapToTickEnabled="True"
         TickFrequency="1" Margin="7,45,0,17"
