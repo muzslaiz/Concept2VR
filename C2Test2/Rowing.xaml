@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:C2Test2"
         mc:Ignorable="d"
         Title="Rowing"  WindowState="Maximized"
-        ResizeMode="CanMinimize">
+        ResizeMode="CanMinimize" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="8*"></RowDefinition>
@@ -16,12 +16,11 @@
                       LoadedBehavior="Manual" UnloadedBehavior="Stop" Grid.Row="0">
 
         </MediaElement>
-        <Label Name="lbl_speedrate" FontSize="20" Content="{Binding Path=speedRatioString}" HorizontalAlignment="Left" Margin="100,47.2,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <!--<Label Name="lbl_speedrate" FontSize="20" Content="{Binding Path=speedRatioString}" HorizontalAlignment="Left" Margin="100,47.2,0,0" Grid.Row="1" VerticalAlignment="Top"/>-->
         <Label Name="lbl_speed" FontSize="20" Content="{Binding Path=speedString}" HorizontalAlignment="Left" Margin="186,47.2,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Name="wdistance" FontSize="20" Content="{Binding Path=workedDistanceString}" HorizontalAlignment="Left" Margin="800,47.2,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Name="lbl_wdistance" FontSize="20" Content="{Binding Path=workedDistanceString}" HorizontalAlignment="Left" Margin="300,47.2,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         <Button Name="btn_speedUp" Content="+" HorizontalAlignment="Left" Margin="665,47.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btn_speedUp_Click_1"/>
-        <Button Name="btn_progress" Content="P" HorizontalAlignment="Left" Margin="562,47.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btn_progress_Click"/>
 
     </Grid>
 </Window>

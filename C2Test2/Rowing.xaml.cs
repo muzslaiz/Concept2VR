@@ -28,6 +28,7 @@ namespace C2Test2
         BusinessLogic logic;
         bool isPlaying;
         int stop;
+        DispatcherTimer timer;
 
         public Rowing(ref BusinessLogic logic_)
         {
@@ -43,7 +44,7 @@ namespace C2Test2
             //logic.Connect();
             logic.Distance = logic.getNewDistance();
 
-            DispatcherTimer timer = new DispatcherTimer();
+            timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(3000);
             timer.Tick += timer_Tick;
             timer.Start();
@@ -105,7 +106,11 @@ namespace C2Test2
                 }
                 logic.Distance = newDistance;
                 var prtg = (this.VideoControl.Position.TotalSeconds / this.VideoControl.NaturalDuration.TimeSpan.TotalSeconds);
-                logic.WorkedDistance = (int)(prtg * Constants.RowDistance);
+                logic.WorkedDistance = prtg * Constants.RowDistance;
+                if (this.WindowState != WindowState.Maximized)
+                {
+                    this.WindowState = WindowState.Maximized;
+                }
             }
             catch (Exception ex)
             {
@@ -121,10 +126,12 @@ namespace C2Test2
             this.VideoControl.Pause();
             logic.Speed = 0;
             logic.SpeedRatio = 0;
+            logic.WorkedDistance = 0;
             isPlaying = false;
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, 0);
             this.VideoControl.Position = ts;
             isPlaying = false;
+            
         }
 
         private void btn_speedUp_Click_1(object sender, RoutedEventArgs e)
@@ -137,6 +144,12 @@ namespace C2Test2
             var prg = this.VideoControl.Position.TotalSeconds;
             var percentage = (this.VideoControl.Position.TotalSeconds / this.VideoControl.NaturalDuration.TimeSpan.TotalSeconds);
             MessageBox.Show(percentage.ToString());
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Reset();
+            timer.Stop();
         }
     }
 }

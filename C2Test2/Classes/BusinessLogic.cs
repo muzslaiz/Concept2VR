@@ -71,8 +71,8 @@ namespace C2Test2.Classes
 
         public uint tDistance;
 
-        private int workedDistance;
-        public int WorkedDistance
+        private double workedDistance;
+        public double WorkedDistance
         {
             get
             {
@@ -86,7 +86,7 @@ namespace C2Test2.Classes
         }
         public string workedDistanceString
         {
-            get { return workedDistance.ToString() + " m"; }
+            get { return Math.Round(workedDistance, 1).ToString() + " m"; }
         }
 
 
@@ -108,16 +108,16 @@ namespace C2Test2.Classes
 
         public void setSpeedRatio()
         {
-            this.SpeedRatio = Math.Round(this.speed / Constants.droneVelocity,2) * 1.1;
+            this.SpeedRatio = Math.Round(this.speed / Constants.droneVelocity,2) * 1.05;
         }
 
         public uint getNewDistance()
         {
-            //CSAFECommand command = new CSAFECommand(0);
-            //command.CommandsBytes.Add((uint)CSAFECommands.CSAFE_GETHORIZONTAL_CMD);
-            //var data = command.Execute();
-            //return PMUSBInterface.getMSB(data, 2);
-            return tDistance;
+            CSAFECommand command = new CSAFECommand(0);
+            command.CommandsBytes.Add((uint)CSAFECommands.CSAFE_GETHORIZONTAL_CMD);
+            var data = command.Execute();
+            return PMUSBInterface.getMSB(data, 2);
+            //return tDistance;
         }
 
         public double getSpeedLevelMultiplier()
