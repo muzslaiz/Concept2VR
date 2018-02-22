@@ -94,6 +94,7 @@ namespace C2Test2.Classes
         {
             speedLevel = 1;
             speedRatio = 1;
+            distance = 0;
             workedDistance = 0;
             this.tDistance = 0;
         }

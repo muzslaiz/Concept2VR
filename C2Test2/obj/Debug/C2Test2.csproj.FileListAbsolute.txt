@@ -25,7 +25,6 @@ C:\Users\muzslaiz\source\repos\Concept2\C2Test2\bin\Debug\C2Test2.exe
 C:\Users\muzslaiz\source\repos\Concept2\C2Test2\bin\Debug\C2Test2.pdb
 C:\Users\muzslaiz\source\repos\Concept2\C2Test2\bin\Debug\Vlc.DotNet.Core.dll
 C:\Users\muzslaiz\source\repos\Concept2\C2Test2\bin\Debug\Vlc.DotNet.Core.Interops.dll
-C:\Users\muzslaiz\source\repos\Concept2\C2Test2\obj\Debug\C2Test2.csprojResolveAssemblyReference.cache
 C:\Users\muzslaiz\source\repos\Concept2\C2Test2\obj\Debug\MainWindow.g.cs
 C:\Users\muzslaiz\source\repos\Concept2\C2Test2\obj\Debug\Options.g.cs
 C:\Users\muzslaiz\source\repos\Concept2\C2Test2\obj\Debug\Rowing.g.cs
